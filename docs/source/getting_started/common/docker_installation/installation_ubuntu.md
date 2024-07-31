@@ -36,10 +36,12 @@ sudo apt-get install \
    lsb-release
 # Add the keyrings of docker
 sudo mkdir -p /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg \
+   | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 # Add the package repository
 echo \
-   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] \
+   https://download.docker.com/linux/ubuntu \
    $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 # Update the package repository
 sudo apt-get update
@@ -60,7 +62,8 @@ This message shows that your installation appears to be working correctly.
 To generate this message, Docker took the following steps:
 1. The Docker client contacted the Docker daemon.
 2. The Docker daemon pulled the "hello-world" image from the Docker Hub. (amd64)
-3. The Docker daemon created a new container from that image which runs the executable that produces the output you are currently reading.
+3. The Docker daemon created a new container from that image which runs the executable that
+   produces the output you are currently reading.
 4. The Docker daemon streamed that output to the Docker client, which sent it to your terminal.
 
 To try something more ambitious, you can run an Ubuntu container with:
