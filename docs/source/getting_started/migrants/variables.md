@@ -75,7 +75,8 @@ variables in this manner:
   "VERILOG_FILES_BLACKBOX": ["dir::macros/spm/nl/spm.nl.v"],
   "EXTRA_GDS_FILES": ["dir::macros/gds/spm.gds"],
   "EXTRA_LEFS": ["dir::macros/lef/spm.lef"],
-  "EXTRA_SPEFS": "spm dir::macros/spm/spef/nom_/spm.min.spef dir::macros/spm/spef/nom_/spm.nom.spef dir::macros/spm/spef/nom_/spm.max.spef",
+  "EXTRA_SPEFS": "spm dir::macros/spm/spef/nom_/spm.min.spef dir::macros/spm/spef/nom_/spm.nom.spef
+                dir::macros/spm/spef/nom_/spm.max.spef",
   "MACRO_PLACEMENT_CFG": "dir::macro_placement.cfg"
 }
 ```
