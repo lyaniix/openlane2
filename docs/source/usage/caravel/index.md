@@ -38,7 +38,8 @@ for more information.
 1. Open a terminal and clone your repository as follows:
 
    ```console
-   $ git clone git@github.com:<github_user_name>/caravel_aes_accelerator.git ~/caravel_aes_accelerator
+   $ git clone git@github.com:<github_user_name>/caravel_aes_accelerator.git \
+      ~/caravel_aes_accelerator
    ```
 
 ______________________________________________________________________
@@ -220,7 +221,8 @@ ______________________________________________________________________
 To open the final {term}`GDSII` layout run this command:
 
 ```console
-[nix-shell:~/openlane2]$ openlane --last-run --flow openinklayout ~/caravel_aes_accelerator/openlane/aes_wb_wrapper/config.json
+[nix-shell:~/openlane2]$ openlane --last-run --flow openinklayout ~/caravel_aes_accelerator \
+                        /openlane/aes_wb_wrapper/config.json
 ```
 
 This opens {term}`KLayout` and you should be able to see the following:
@@ -342,21 +344,36 @@ ______________________________________________________________________
 Under `xx-openroad-stapostpnr` there should be a file called `summary.rpt`:
 
 ```text
-┏━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓
-┃              ┃ Hold Worst   ┃ Reg to Reg   ┃          ┃ Hold         ┃ of which Reg ┃ Setup Worst  ┃ Reg to Reg   ┃           ┃ Setup       ┃ of which Reg ┃ Max Cap     ┃ Max Slew     ┃
-┃ Corner/Group ┃ Slack        ┃ Paths        ┃ Hold TNS ┃ Violations   ┃ to Reg       ┃ Slack        ┃ Paths        ┃ Setup TNS ┃ Violations  ┃ to Reg       ┃ Violations  ┃ Violations   ┃
-┡━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━┩
-│ Overall      │ 0.1045       │ 0.1045       │ 0.0000   │ 0            │ 0            │ 6.2448       │ 6.2448       │ 0.0000    │ 0           │ 0            │ 257         │ 1554         │
-│ nom_tt_025C… │ 0.3111       │ 0.3111       │ 0.0000   │ 0            │ 0            │ 12.5817      │ 15.9480      │ 0.0000    │ 0           │ 0            │ 179         │ 126          │
-│ nom_ss_100C… │ 0.8728       │ 0.8728       │ 0.0000   │ 0            │ 0            │ 6.6277       │ 6.6277       │ 0.0000    │ 0           │ 0            │ 191         │ 1227         │
-│ nom_ff_n40C… │ 0.1058       │ 0.1058       │ 0.0000   │ 0            │ 0            │ 13.4537      │ 19.3029      │ 0.0000    │ 0           │ 0            │ 181         │ 26           │
-│ min_tt_025C… │ 0.3098       │ 0.3098       │ 0.0000   │ 0            │ 0            │ 12.6013      │ 16.1989      │ 0.0000    │ 0           │ 0            │ 119         │ 76           │
-│ min_ss_100C… │ 0.8712       │ 0.8712       │ 0.0000   │ 0            │ 0            │ 7.0939       │ 7.0939       │ 0.0000    │ 0           │ 0            │ 122         │ 849          │
-│ min_ff_n40C… │ 0.1045       │ 0.1045       │ 0.0000   │ 0            │ 0            │ 13.4665      │ 19.4702      │ 0.0000    │ 0           │ 0            │ 119         │ 0            │
-│ max_tt_025C… │ 0.3131       │ 0.3131       │ 0.0000   │ 0            │ 0            │ 12.5529      │ 15.7241      │ 0.0000    │ 0           │ 0            │ 239         │ 183          │
-│ max_ss_100C… │ 0.8762       │ 0.8762       │ 0.0000   │ 0            │ 0            │ 6.2448       │ 6.2448       │ 0.0000    │ 0           │ 0            │ 257         │ 1554         │
-│ max_ff_n40C… │ 0.1073       │ 0.1073       │ 0.0000   │ 0            │ 0            │ 13.4347      │ 19.1522      │ 0.0000    │ 0           │ 0            │ 239         │ 36           │
-└──────────────┴──────────────┴──────────────┴──────────┴──────────────┴──────────────┴──────────────┴──────────────┴───────────┴─────────────┴──────────────┴─────────────┴──────────────┘
+┏━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳
+┃              ┃ Hold Worst   ┃ Reg to Reg   ┃          ┃ Hold         ┃ of which Reg ┃ 
+┃ Corner/Group ┃ Slack        ┃ Paths        ┃ Hold TNS ┃ Violations   ┃ to Reg       ┃ 
+┡━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇
+│ Overall      │ 0.1045       │ 0.1045       │ 0.0000   │ 0            │ 0            │ 
+│ nom_tt_025C… │ 0.3111       │ 0.3111       │ 0.0000   │ 0            │ 0            │ 
+│ nom_ss_100C… │ 0.8728       │ 0.8728       │ 0.0000   │ 0            │ 0            │ 
+│ nom_ff_n40C… │ 0.1058       │ 0.1058       │ 0.0000   │ 0            │ 0            │
+│ min_tt_025C… │ 0.3098       │ 0.3098       │ 0.0000   │ 0            │ 0            │
+│ min_ss_100C… │ 0.8712       │ 0.8712       │ 0.0000   │ 0            │ 0            │
+│ min_ff_n40C… │ 0.1045       │ 0.1045       │ 0.0000   │ 0            │ 0            │ 
+│ max_tt_025C… │ 0.3131       │ 0.3131       │ 0.0000   │ 0            │ 0            │
+│ max_ss_100C… │ 0.8762       │ 0.8762       │ 0.0000   │ 0            │ 0            │
+│ max_ff_n40C… │ 0.1073       │ 0.1073       │ 0.0000   │ 0            │ 0            │
+└──────────────┴──────────────┴──────────────┴──────────┴──────────────┴──────────────┴
+┳━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓
+┃ Setup Worst  ┃ Reg to Reg┃           ┃ Setup       ┃ of which Reg ┃ Max Cap     ┃ Max Slew     ┃
+┃ Slack        ┃ Paths     ┃ Setup TNS ┃ Violations  ┃ to Reg       ┃ Violations  ┃ Violations   ┃
+╇━━━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━┩
+│ 6.2448       │ 6.2448    │ 0.0000    │ 0           │ 0            │ 257         │ 1554         │
+│ 12.5817      │ 15.9480   │ 0.0000    │ 0           │ 0            │ 179         │ 126          │
+│ 6.6277       │ 6.6277    │ 0.0000    │ 0           │ 0            │ 191         │ 1227         │
+│ 13.4537      │ 19.3029   │ 0.0000    │ 0           │ 0            │ 181         │ 26           │
+│ 12.6013      │ 16.1989   │ 0.0000    │ 0           │ 0            │ 119         │ 76           │
+│ 7.0939       │ 7.0939    │ 0.0000    │ 0           │ 0            │ 122         │ 849          │
+│ 13.4665      │ 19.4702   │ 0.0000    │ 0           │ 0            │ 119         │ 0            │
+│ 12.5529      │ 15.7241   │ 0.0000    │ 0           │ 0            │ 239         │ 183          │
+│ 6.2448       │ 6.2448    │ 0.0000    │ 0           │ 0            │ 257         │ 1554         │
+│ 13.4347      │ 19.1522   │ 0.0000    │ 0           │ 0            │ 239         │ 36           │
+┴──────────────┴───────────┴───────────┴─────────────┴──────────────┴─────────────┴──────────────┘
 ```
 
 As seen in the report, there are no hold or setup violations. There are only Max
@@ -765,22 +782,38 @@ Also, the STA report at `xx-openroad-stapostpnr/summary.rpt` should have no
 issues:
 
 ```text
-┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━┓
-┃           ┃ Hold      ┃           ┃          ┃           ┃ of which  ┃ Setup     ┃           ┃           ┃           ┃ of which  ┃           ┃          ┃
-┃           ┃ Worst     ┃ Reg to    ┃          ┃ Hold      ┃ Reg to    ┃ Worst     ┃ Reg to    ┃           ┃ Setup     ┃ Reg to    ┃ Max Cap   ┃ Max Slew ┃
-┃ Corner/G… ┃ Slack     ┃ Reg Paths ┃ Hold TNS ┃ Violatio… ┃ Reg       ┃ Slack     ┃ Reg Paths ┃ Setup TNS ┃ Violatio… ┃ Reg       ┃ Violatio… ┃ Violati… ┃
-┡━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━┩
-│ Overall   │ 0.1601    │ 0.1601    │ 0.0000   │ 0         │ 0         │ 4.4661    │ 6.0628    │ 0.0000    │ 0         │ 0         │ 0         │ 0        │
-│ nom_tt_0… │ 0.2973    │ 0.3282    │ 0.0000   │ 0         │ 0         │ 10.4185   │ 15.6935   │ 0.0000    │ 0         │ 0         │ 0         │ 0        │
-│ nom_ss_1… │ 0.7765    │ 0.7803    │ 0.0000   │ 0         │ 0         │ 4.6415    │ 6.5571    │ 0.0000    │ 0         │ 0         │ 0         │ 0        │
-│ nom_ff_n… │ 0.1650    │ 0.1650    │ 0.0000   │ 0         │ 0         │ 11.1307   │ 19.2289   │ 0.0000    │ 0         │ 0         │ 0         │ 0        │
-│ min_tt_0… │ 0.3215    │ 0.3215    │ 0.0000   │ 0         │ 0         │ 10.5622   │ 15.9933   │ 0.0000    │ 0         │ 0         │ 0         │ 0        │
-│ min_ss_1… │ 0.7678    │ 0.7678    │ 0.0000   │ 0         │ 0         │ 4.8466    │ 7.0670    │ 0.0000    │ 0         │ 0         │ 0         │ 0        │
-│ min_ff_n… │ 0.1601    │ 0.1601    │ 0.0000   │ 0         │ 0         │ 11.1436   │ 19.4234   │ 0.0000    │ 0         │ 0         │ 0         │ 0        │
-│ max_tt_0… │ 0.2648    │ 0.3330    │ 0.0000   │ 0         │ 0         │ 10.2510   │ 15.4043   │ 0.0000    │ 0         │ 0         │ 0         │ 0        │
-│ max_ss_1… │ 0.7331    │ 0.7868    │ 0.0000   │ 0         │ 0         │ 4.4661    │ 6.0628    │ 0.0000    │ 0         │ 0         │ 0         │ 0        │
-│ max_ff_n… │ 0.1656    │ 0.1656    │ 0.0000   │ 0         │ 0         │ 11.1023   │ 19.0289   │ 0.0000    │ 0         │ 0         │ 0         │ 0        │
-└───────────┴───────────┴───────────┴──────────┴───────────┴───────────┴───────────┴───────────┴───────────┴───────────┴───────────┴───────────┴──────────┘
+┏━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳
+┃           ┃ Hold   ┃           ┃          ┃           ┃ of which  ┃ Setup     ┃           ┃
+┃           ┃ Worst  ┃ Reg to    ┃          ┃ Hold      ┃ Reg to    ┃ Worst     ┃ Reg to    ┃
+┃ Corner/G… ┃ Slack  ┃ Reg Paths ┃ Hold TNS ┃ Violatio… ┃ Reg       ┃ Slack     ┃ Reg Paths ┃
+┡━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━╇
+│ Overall   │ 0.1601 │ 0.1601    │ 0.0000   │ 0         │ 0         │ 4.4661    │ 6.0628    │
+│ nom_tt_0… │ 0.2973 │ 0.3282    │ 0.0000   │ 0         │ 0         │ 10.4185   │ 15.6935   │
+│ nom_ss_1… │ 0.7765 │ 0.7803    │ 0.0000   │ 0         │ 0         │ 4.6415    │ 6.5571    │
+│ nom_ff_n… │ 0.1650 │ 0.1650    │ 0.0000   │ 0         │ 0         │ 11.1307   │ 19.2289   │
+│ min_tt_0… │ 0.3215 │ 0.3215    │ 0.0000   │ 0         │ 0         │ 10.5622   │ 15.9933   │
+│ min_ss_1… │ 0.7678 │ 0.7678    │ 0.0000   │ 0         │ 0         │ 4.8466    │ 7.0670    │
+│ min_ff_n… │ 0.1601 │ 0.1601    │ 0.0000   │ 0         │ 0         │ 11.1436   │ 19.4234   │
+│ max_tt_0… │ 0.2648 │ 0.3330    │ 0.0000   │ 0         │ 0         │ 10.2510   │ 15.4043   │
+│ max_ss_1… │ 0.7331 │ 0.7868    │ 0.0000   │ 0         │ 0         │ 4.4661    │ 6.0628    │
+│ max_ff_n… │ 0.1656 │ 0.1656    │ 0.0000   │ 0         │ 0         │ 11.1023   │ 19.0289   │
+└───────────┴────────┴───────────┴──────────┴───────────┴───────────┴───────────┴───────────┴
+┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━┓
+┃           ┃           ┃ of which  ┃           ┃          ┃
+┃           ┃ Setup     ┃ Reg to    ┃ Max Cap   ┃ Max Slew ┃
+┃ Setup TNS ┃ Violatio… ┃ Reg       ┃ Violatio… ┃ Violati… ┃
+╇━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━┩
+│ 0.0000    │ 0         │ 0         │ 0         │ 0        │
+│ 0.0000    │ 0         │ 0         │ 0         │ 0        │
+│ 0.0000    │ 0         │ 0         │ 0         │ 0        │
+│ 0.0000    │ 0         │ 0         │ 0         │ 0        │
+│ 0.0000    │ 0         │ 0         │ 0         │ 0        │
+│ 0.0000    │ 0         │ 0         │ 0         │ 0        │
+│ 0.0000    │ 0         │ 0         │ 0         │ 0        │
+│ 0.0000    │ 0         │ 0         │ 0         │ 0        │
+│ 0.0000    │ 0         │ 0         │ 0         │ 0        │
+│ 0.0000    │ 0         │ 0         │ 0         │ 0        │
+┴───────────┴───────────┴───────────┴───────────┴──────────┘
 ```
 
 ______________________________________________________________________
@@ -795,7 +828,8 @@ order:
 1. The successful run tag
 
 ```console
-[nix-shell:~/openlane2]$ bash ~/caravel_aes_accelerator/openlane/copy_views.sh ~/caravel_aes_accelerator aes_wb_wrapper RUN_TAG
+[nix-shell:~/openlane2]$ bash ~/caravel_aes_accelerator/openlane/copy_views.sh \
+            ~/caravel_aes_accelerator aes_wb_wrapper RUN_TAG
 ```
 
 This will copy the physical views of the macro in the specified run to your
@@ -910,7 +944,8 @@ ______________________________________________________________________
 #### Running the flow
 
 ```console
-[nix-shell:~/openlane2]$ openlane ~/caravel_aes_accelerator/openlane/user_project_wrapper/config.json
+[nix-shell:~/openlane2]$ openlane ~/caravel_aes_accelerator/openlane \
+            /user_project_wrapper/config.json
 ```
 
 ````{tip}
@@ -941,7 +976,8 @@ ______________________________________________________________________
 To open the final {term}`GDSII` layout run this command:
 
 ```console
-[nix-shell:~/openlane2]$ openlane --last-run --flow openinklayout ~/caravel_aes_accelerator/openlane/user_project_wrapper/config.json
+[nix-shell:~/openlane2]$ openlane --last-run --flow openinklayout ~/caravel_aes_accelerator \
+            /openlane/user_project_wrapper/config.json
 ```
 
 This opens {term}`KLayout` and you should be able to see the following:
@@ -998,21 +1034,36 @@ violations. If we look at the nets with violations, we will find that those are
 the long nets we saw in the GDS.
 
 ```
-┏━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┓
-┃                ┃ Hold Worst     ┃ Reg to Reg     ┃          ┃ Hold           ┃ of which Reg   ┃ Setup Worst    ┃ Reg to Reg     ┃           ┃ Setup          ┃ of which Reg   ┃ Max Cap       ┃ Max Slew       ┃
-┃ Corner/Group   ┃ Slack          ┃ Paths          ┃ Hold TNS ┃ Violations     ┃ to Reg         ┃ Slack          ┃ Paths          ┃ Setup TNS ┃ Violations     ┃ to Reg         ┃ Violations    ┃ Violations     ┃
-┡━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━┩
-│ Overall        │ 0.0108         │ 0.0108         │ 0.0000   │ 0              │ 0              │ 1.6312         │ 7.1309         │ 0.0000    │ 0              │ 0              │ 0             │ 70             │
-│ nom_tt_025C_1… │ 0.1371         │ 0.1596         │ 0.0000   │ 0              │ 0              │ 8.2216         │ 16.2820        │ 0.0000    │ 0              │ 0              │ 0             │ 45             │
-│ nom_ss_100C_1… │ 0.0830         │ 0.5879         │ 0.0000   │ 0              │ 0              │ 2.2298         │ 7.6748         │ 0.0000    │ 0              │ 0              │ 0             │ 56             │
-│ nom_ff_n40C_1… │ 0.0120         │ 0.0120         │ 0.0000   │ 0              │ 0              │ 10.2962        │ 19.5219        │ 0.0000    │ 0              │ 0              │ 0             │ 39             │
-│ min_tt_025C_1… │ 0.1579         │ 0.1579         │ 0.0000   │ 0              │ 0              │ 8.8353         │ 16.5546        │ 0.0000    │ 0              │ 0              │ 0             │ 30             │
-│ min_ss_100C_1… │ 0.1465         │ 0.5847         │ 0.0000   │ 0              │ 0              │ 2.9034         │ 8.1574         │ 0.0000    │ 0              │ 0              │ 0             │ 38             │
-│ min_ff_n40C_1… │ 0.0108         │ 0.0108         │ 0.0000   │ 0              │ 0              │ 10.8591        │ 19.7016        │ 0.0000    │ 0              │ 0              │ 0             │ 28             │
-│ max_tt_025C_1… │ 0.1038         │ 0.1618         │ 0.0000   │ 0              │ 0              │ 7.6237         │ 15.9806        │ 0.0000    │ 0              │ 0              │ 0             │ 65             │
-│ max_ss_100C_1… │ 0.0268         │ 0.5914         │ 0.0000   │ 0              │ 0              │ 1.6312         │ 7.1309         │ 0.0000    │ 0              │ 0              │ 0             │ 70             │
-│ max_ff_n40C_1… │ 0.0135         │ 0.0135         │ 0.0000   │ 0              │ 0              │ 9.7517         │ 19.3107        │ 0.0000    │ 0              │ 0              │ 0             │ 58             │
-└────────────────┴────────────────┴────────────────┴──────────┴────────────────┴────────────────┴────────────────┴────────────────┴───────────┴────────────────┴────────────────┴───────────────┴────────────────┘
+┏━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳
+┃                ┃ Hold Worst     ┃ Reg to Reg     ┃          ┃ Hold           ┃ of which Reg   ┃
+┃ Corner/Group   ┃ Slack          ┃ Paths          ┃ Hold TNS ┃ Violations     ┃ to Reg         ┃
+┡━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇
+│ Overall        │ 0.0108         │ 0.0108         │ 0.0000   │ 0              │ 0              │
+│ nom_tt_025C_1… │ 0.1371         │ 0.1596         │ 0.0000   │ 0              │ 0              │
+│ nom_ss_100C_1… │ 0.0830         │ 0.5879         │ 0.0000   │ 0              │ 0              │
+│ nom_ff_n40C_1… │ 0.0120         │ 0.0120         │ 0.0000   │ 0              │ 0              │
+│ min_tt_025C_1… │ 0.1579         │ 0.1579         │ 0.0000   │ 0              │ 0              │
+│ min_ss_100C_1… │ 0.1465         │ 0.5847         │ 0.0000   │ 0              │ 0              │
+│ min_ff_n40C_1… │ 0.0108         │ 0.0108         │ 0.0000   │ 0              │ 0              │
+│ max_tt_025C_1… │ 0.1038         │ 0.1618         │ 0.0000   │ 0              │ 0              │
+│ max_ss_100C_1… │ 0.0268         │ 0.5914         │ 0.0000   │ 0              │ 0              │
+│ max_ff_n40C_1… │ 0.0135         │ 0.0135         │ 0.0000   │ 0              │ 0              │
+└────────────────┴────────────────┴────────────────┴──────────┴────────────────┴────────────────┴
+┳━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┓
+┃ Setup Worst ┃ Reg to Reg ┃           ┃ Setup      ┃ of which Reg   ┃ Max Cap     ┃ Max Slew       ┃
+┃ Slack       ┃ Paths      ┃ Setup TNS ┃ Violations ┃ to Reg         ┃ Violations  ┃ Violations     ┃
+╇━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━┩
+│ 1.6312      │ 7.1309     │ 0.0000    │ 0          │ 0              │ 0           │ 70             │
+│ 8.2216      │ 16.2820    │ 0.0000    │ 0          │ 0              │ 0           │ 45             │
+│ 2.2298      │ 7.6748     │ 0.0000    │ 0          │ 0              │ 0           │ 56             │
+│ 10.2962     │ 19.5219    │ 0.0000    │ 0          │ 0              │ 0           │ 39             │
+│ 8.8353      │ 16.5546    │ 0.0000    │ 0          │ 0              │ 0           │ 30             │
+│ 2.9034      │ 8.1574     │ 0.0000    │ 0          │ 0              │ 0           │ 38             │
+│ 10.8591     │ 19.7016    │ 0.0000    │ 0          │ 0              │ 0           │ 28             │
+│ 7.6237      │ 15.9806    │ 0.0000    │ 0          │ 0              │ 0           │ 65             │
+│ 1.6312      │ 7.1309     │ 0.0000    │ 0          │ 0              │ 0           │ 70             │
+│ 9.7517      │ 19.3107    │ 0.0000    │ 0          │ 0              │ 0           │ 58             │
+┴─────────────┴────────────┴───────────┴────────────┴────────────────┴─────────────┴────────────────┘
 ```
 
 ```
@@ -1254,13 +1305,15 @@ Then, after checking the `aes_wb_wrapper` reports, save the physical views
 using:
 
 ```console
-[nix-shell:~/openlane2]$ bash ~/caravel_aes_accelerator/openlane/copy_views.sh ~/caravel_aes_accelerator aes_wb_wrapper RUN_TAG
+[nix-shell:~/openlane2]$ bash ~/caravel_aes_accelerator/openlane/copy_views.sh \
+            ~/caravel_aes_accelerator aes_wb_wrapper RUN_TAG
 ```
 
 Then rerun the `user_project_wrapper`
 
 ```console
-[nix-shell:~/openlane2]$ openlane ~/caravel_aes_accelerator/openlane/user_project_wrapper/config.json
+[nix-shell:~/openlane2]$ openlane ~/caravel_aes_accelerator/openlane \
+            /user_project_wrapper/config.json
 ```
 
 ______________________________________________________________________
@@ -1270,7 +1323,8 @@ ______________________________________________________________________
 To open the final {term}`GDSII` layout run this command:
 
 ```console
-[nix-shell:~/openlane2]$ openlane --last-run --flow openinklayout ~/caravel_aes_accelerator/openlane/user_project_wrapper/config.json
+[nix-shell:~/openlane2]$ openlane --last-run --flow openinklayout ~/caravel_aes_accelerator \
+            /openlane/user_project_wrapper/config.json
 ```
 
 Now our macro is placed at the bottom left corner close to the wishbone pins.
@@ -1296,21 +1350,36 @@ Shorter routes in the user_project_wrapper
 The STA report `xx-openroad-stapostpnr/summary.rpt` now has no issues:
 
 ```text
-┏━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┓
-┃                ┃ Hold Worst     ┃ Reg to Reg     ┃          ┃ Hold           ┃ of which Reg   ┃ Setup Worst   ┃ Reg to Reg     ┃           ┃ Setup         ┃ of which Reg   ┃ Max Cap       ┃ Max Slew       ┃
-┃ Corner/Group   ┃ Slack          ┃ Paths          ┃ Hold TNS ┃ Violations     ┃ to Reg         ┃ Slack         ┃ Paths          ┃ Setup TNS ┃ Violations    ┃ to Reg         ┃ Violations    ┃ Violations     ┃
-┡━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━┩
-│ Overall        │ 0.0502         │ 0.0502         │ 0.0000   │ 0              │ 0              │ 6.0984        │ 6.6834         │ 0.0000    │ 0             │ 0              │ 0             │ 0              │
-│ nom_tt_025C_1… │ 0.2279         │ 0.2279         │ 0.0000   │ 0              │ 0              │ 11.0441       │ 16.0780        │ 0.0000    │ 0             │ 0              │ 0             │ 0              │
-│ nom_ss_100C_1… │ 0.3832         │ 0.7152         │ 0.0000   │ 0              │ 0              │ 6.2205        │ 7.0983         │ 0.0000    │ 0             │ 0              │ 0             │ 0              │
-│ nom_ff_n40C_1… │ 0.0519         │ 0.0519         │ 0.0000   │ 0              │ 0              │ 11.0893       │ 19.4628        │ 0.0000    │ 0             │ 0              │ 0             │ 0              │
-│ min_tt_025C_1… │ 0.2256         │ 0.2256         │ 0.0000   │ 0              │ 0              │ 11.0382       │ 16.3619        │ 0.0000    │ 0             │ 0              │ 0             │ 0              │
-│ min_ss_100C_1… │ 0.4091         │ 0.7107         │ 0.0000   │ 0              │ 0              │ 6.3816        │ 7.5777         │ 0.0000    │ 0             │ 0              │ 0             │ 0              │
-│ min_ff_n40C_1… │ 0.0502         │ 0.0502         │ 0.0000   │ 0              │ 0              │ 11.0806       │ 19.6363        │ 0.0000    │ 0             │ 0              │ 0             │ 0              │
-│ max_tt_025C_1… │ 0.2304         │ 0.2304         │ 0.0000   │ 0              │ 0              │ 11.0653       │ 15.8331        │ 0.0000    │ 0             │ 0              │ 0             │ 0              │
-│ max_ss_100C_1… │ 0.3418         │ 0.7198         │ 0.0000   │ 0              │ 0              │ 6.0984        │ 6.6834         │ 0.0000    │ 0             │ 0              │ 0             │ 0              │
-│ max_ff_n40C_1… │ 0.0537         │ 0.0537         │ 0.0000   │ 0              │ 0              │ 11.1018       │ 19.2829        │ 0.0000    │ 0             │ 0              │ 0             │ 0              │
-└────────────────┴────────────────┴────────────────┴──────────┴────────────────┴────────────────┴───────────────┴────────────────┴───────────┴───────────────┴────────────────┴───────────────┴────────────────┘
+┏━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳
+┃                ┃ Hold Worst     ┃ Reg to Reg     ┃          ┃ Hold           ┃ of which Reg   ┃
+┃ Corner/Group   ┃ Slack          ┃ Paths          ┃ Hold TNS ┃ Violations     ┃ to Reg         ┃
+┡━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇
+│ Overall        │ 0.0502         │ 0.0502         │ 0.0000   │ 0              │ 0              │
+│ nom_tt_025C_1… │ 0.2279         │ 0.2279         │ 0.0000   │ 0              │ 0              │
+│ nom_ss_100C_1… │ 0.3832         │ 0.7152         │ 0.0000   │ 0              │ 0              │
+│ nom_ff_n40C_1… │ 0.0519         │ 0.0519         │ 0.0000   │ 0              │ 0              │
+│ min_tt_025C_1… │ 0.2256         │ 0.2256         │ 0.0000   │ 0              │ 0              │
+│ min_ss_100C_1… │ 0.4091         │ 0.7107         │ 0.0000   │ 0              │ 0              │ 
+│ min_ff_n40C_1… │ 0.0502         │ 0.0502         │ 0.0000   │ 0              │ 0              │ 
+│ max_tt_025C_1… │ 0.2304         │ 0.2304         │ 0.0000   │ 0              │ 0              │
+│ max_ss_100C_1… │ 0.3418         │ 0.7198         │ 0.0000   │ 0              │ 0              │ 
+│ max_ff_n40C_1… │ 0.0537         │ 0.0537         │ 0.0000   │ 0              │ 0              │ 
+└────────────────┴────────────────┴────────────────┴──────────┴────────────────┴────────────────┴
+┳━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┓
+┃ Setup Worst ┃ Reg to Reg ┃           ┃ Setup      ┃ of which Reg   ┃ Max Cap    ┃ Max Slew       ┃
+┃ Slack       ┃ Paths      ┃ Setup TNS ┃ Violations ┃ to Reg         ┃ Violations ┃ Violations     ┃
+╇━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━┩
+│ 6.0984      │ 6.6834     │ 0.0000    │ 0          │ 0              │ 0          │ 0              │
+│ 11.0441     │ 16.0780    │ 0.0000    │ 0          │ 0              │ 0          │ 0              │
+│ 6.2205      │ 7.0983     │ 0.0000    │ 0          │ 0              │ 0          │ 0              │
+│ 11.0893     │ 19.4628    │ 0.0000    │ 0          │ 0              │ 0          │ 0              │
+│ 11.0382     │ 16.3619    │ 0.0000    │ 0          │ 0              │ 0          │ 0              │
+│ 6.3816      │ 7.5777     │ 0.0000    │ 0          │ 0              │ 0          │ 0              │
+│ 11.0806     │ 19.6363    │ 0.0000    │ 0          │ 0              │ 0          │ 0              │
+│ 11.0653     │ 15.8331    │ 0.0000    │ 0          │ 0              │ 0          │ 0              │
+│ 6.0984      │ 6.6834     │ 0.0000    │ 0          │ 0              │ 0          │ 0              │
+│ 11.1018     │ 19.2829    │ 0.0000    │ 0          │ 0              │ 0          │ 0              │
+┴─────────────┴────────────┴───────────┴────────────┴────────────────┴────────────┴────────────────┘
 
 ```
 
@@ -1326,7 +1395,8 @@ order:
 1. The successful run tag
 
 ```console
-[nix-shell:~/openlane2]$ bash ~/caravel_aes_accelerator/openlane/copy_views.sh ~/caravel_aes_accelerator user_project_wrapper RUN_TAG
+[nix-shell:~/openlane2]$ bash ~/caravel_aes_accelerator/openlane/copy_views.sh \
+            ~/caravel_aes_accelerator user_project_wrapper RUN_TAG
 ```
 
 This will copy the physical views of the macro in the specified run to your
@@ -1368,7 +1438,8 @@ are needed for the `user_project_wrapper`
 1. Update the hardening strategy part to the flattened version
 
 ```json
-    "//": "Hardening strategy variables (this is for 2-Full-Wrapper Flattening). Visit https://docs.google.com/document/d/1pf-wbpgjeNEM-1TcvX2OJTkHjqH_C9p-LURCASS0Zo8 for more info",
+    "//": "Hardening strategy variables (this is for 2-Full-Wrapper Flattening). Visit https://
+         docs.google.com/document/d/1pf-wbpgjeNEM-1TcvX2OJTkHjqH_C9p-LURCASS0Zo8 for more info",
     "SYNTH_ELABORATE_ONLY": false,
     "RUN_POST_GPL_DESIGN_REPAIR": true,
     "RUN_POST_CTS_RESIZER_TIMING": true,
@@ -1405,7 +1476,8 @@ Now the full configuration file will be:
     ],
     "PNR_SDC_FILE": "dir::signoff.sdc",
     
-    "//": "Hardening strategy variables (this is for 2-Full-Wrapper Flattening). Visit https://docs.google.com/document/d/1pf-wbpgjeNEM-1TcvX2OJTkHjqH_C9p-LURCASS0Zo8 for more info",
+    "//": "Hardening strategy variables (this is for 2-Full-Wrapper Flattening). Visit https://
+         docs.google.com/document/d/1pf-wbpgjeNEM-1TcvX2OJTkHjqH_C9p-LURCASS0Zo8 for more info",
     "SYNTH_ELABORATE_ONLY": false,
     "RUN_POST_GPL_DESIGN_REPAIR": true,
     "RUN_POST_CTS_RESIZER_TIMING": true,
@@ -1472,7 +1544,8 @@ ______________________________________________________________________
 To harden macros with OpenLane, we use the default flow, {flow}`Classic`.
 
 ```console
-[nix-shell:~/openlane2]$ openlane ~/caravel_aes_accelerator/openlane/user_project_wrapper/config.json
+[nix-shell:~/openlane2]$ openlane ~/caravel_aes_accelerator/openlane
+            /user_project_wrapper/config.json
 ```
 
 The flow will finish successfully in ~2 hours and we will see:
@@ -1488,7 +1561,8 @@ ______________________________________________________________________
 To open the final {term}`GDSII` layout run this command:
 
 ```console
-[nix-shell:~/openlane2]$ openlane --last-run --flow openinklayout ~/caravel_aes_accelerator/openlane/user_project_wrapper/config.json
+[nix-shell:~/openlane2]$ openlane --last-run --flow openinklayout ~/caravel_aes_accelerator
+            openlane/user_project_wrapper/config.json
 ```
 
 Now, we can see that there are STD cells all over the `user_project_wrapper`
@@ -1508,17 +1582,18 @@ Final layout of the user_project_wrapper after flattening
 There are around 260 antenna violations with ratios up to 7.
 
 ```
-┏━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━┓
-┃ Partial/Required ┃ Required ┃ Partial ┃ Net                                       ┃ Pin          ┃ Layer ┃
-┡━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━┩
-│ 7.55             │ 400.00   │ 3018.79 │ _14743_                                   │ _28341_/B    │ met3  │
-│ 6.82             │ 400.00   │ 2727.89 │ net1493                                   │ _24384_/B    │ met1  │
-│ 4.68             │ 400.00   │ 1870.11 │ mprj.aes.core.enc_block.block_w0_reg[18\] │ _20471_/A    │ met1  │
-│ 3.86             │ 400.00   │ 1544.22 │ _11561_                                   │ _22409_/A0   │ met1  │
-│ 3.80             │ 400.00   │ 1519.33 │ _11868_                                   │ _22752_/A0   │ met1  │
-│ 3.71             │ 400.00   │ 1485.23 │ _14658_                                   │ fanout1328/A │ met1  │
-│ 3.61             │ 400.00   │ 1443.72 │ net19                                     │ hold86/A     │ met2  │
-│ 3.45             │ 400.00   │ 1380.11 │ mprj.aes.core.enc_block.block_w1_reg[6\]  │ _22727_/A1   │ met1  │
+┏━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━┓
+┃ Partial  ┃ Required┃ Partial ┃ Net                                      ┃ Pin         ┃ Layer ┃
+┃ /Required┃         ┃         ┃                                          ┃             ┃       ┃
+┡━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━┩
+│ 7.55     │ 400.00  │ 3018.79 │ _14743_                                  │ _28341_/B   │ met3  │
+│ 6.82     │ 400.00  │ 2727.89 │ net1493                                  │ _24384_/B   │ met1  │
+│ 4.68     │ 400.00  │ 1870.11 │ mprj.aes.core.enc_block.block_w0_reg[18\]│ _20471_/A   │ met1  │
+│ 3.86     │ 400.00  │ 1544.22 │ _11561_                                  │ _22409_/A0  │ met1  │
+│ 3.80     │ 400.00  │ 1519.33 │ _11868_                                  │ _22752_/A0  │ met1  │
+│ 3.71     │ 400.00  │ 1485.23 │ _14658_                                  │ fanout1328/A│ met1  │
+│ 3.61     │ 400.00  │ 1443.72 │ net19                                    │ hold86/A    │ met2  │
+│ 3.45     │ 400.00  │ 1380.11 │ mprj.aes.core.enc_block.block_w1_reg[6\] │ _22727_/A1  │ met1  │
 ⋮
 ```
 
@@ -1532,21 +1607,36 @@ Looking at `xx-openroad-stapostpnr/summary.rpt`, there are multiple max Slew/Cap
 violations and 1 hold violation which is not Reg to Reg.
 
 ```
-┏━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓
-┃              ┃ Hold Worst   ┃ Reg to Reg   ┃          ┃ Hold         ┃ of which Reg ┃ Setup Worst   ┃ Reg to Reg   ┃           ┃ Setup         ┃ of which Reg ┃ Max Cap       ┃ Max Slew     ┃
-┃ Corner/Group ┃ Slack        ┃ Paths        ┃ Hold TNS ┃ Violations   ┃ to Reg       ┃ Slack         ┃ Paths        ┃ Setup TNS ┃ Violations    ┃ to Reg       ┃ Violations    ┃ Violations   ┃
-┡━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━┩
-│ Overall      │ -0.0108      │ 0.1068       │ -0.0108  │ 1            │ 0            │ 5.1907        │ 5.1907       │ 0.0000    │ 0             │ 0            │ 44            │ 275          │
-│ nom_tt_025C… │ 0.1236       │ 0.3212       │ 0.0000   │ 0            │ 0            │ 11.2213       │ 15.3832      │ 0.0000    │ 0             │ 0            │ 1             │ 4            │
-│ nom_ss_100C… │ 0.4500       │ 0.8885       │ 0.0000   │ 0            │ 0            │ 5.7475        │ 5.7475       │ 0.0000    │ 0             │ 0            │ 38            │ 235          │
-│ nom_ff_n40C… │ 0.0365       │ 0.1079       │ 0.0000   │ 0            │ 0            │ 11.1783       │ 18.8282      │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
-│ min_tt_025C… │ 0.1726       │ 0.3196       │ 0.0000   │ 0            │ 0            │ 11.2516       │ 15.6835      │ 0.0000    │ 0             │ 0            │ 1             │ 1            │
-│ min_ss_100C… │ 0.5527       │ 0.8798       │ 0.0000   │ 0            │ 0            │ 6.2822        │ 6.2822       │ 0.0000    │ 0             │ 0            │ 29            │ 168          │
-│ min_ff_n40C… │ 0.0791       │ 0.1068       │ 0.0000   │ 0            │ 0            │ 11.2090       │ 19.0602      │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
-│ max_tt_025C… │ 0.0536       │ 0.3234       │ 0.0000   │ 0            │ 0            │ 11.1886       │ 15.0609      │ 0.0000    │ 0             │ 0            │ 5             │ 25           │
-│ max_ss_100C… │ 0.3233       │ 0.8972       │ 0.0000   │ 0            │ 0            │ 5.1907        │ 5.1907       │ 0.0000    │ 0             │ 0            │ 44            │ 275          │
-│ max_ff_n40C… │ -0.0108      │ 0.1095       │ -0.0108  │ 1            │ 0            │ 11.1440       │ 18.5834      │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
-└──────────────┴──────────────┴──────────────┴──────────┴──────────────┴──────────────┴───────────────┴──────────────┴───────────┴───────────────┴──────────────┴───────────────┴──────────────┘
+┏━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳
+┃              ┃ Hold Worst ┃ Reg to Reg ┃          ┃ Hold       ┃ of which Reg ┃ Setup Worst ┃
+┃ Corner/Group ┃ Slack      ┃ Paths      ┃ Hold TNS ┃ Violations ┃ to Reg       ┃ Slack       ┃
+┡━━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇
+│ Overall      │ -0.0108    │ 0.1068     │ -0.0108  │ 1          │ 0            │ 5.1907      │
+│ nom_tt_025C… │ 0.1236     │ 0.3212     │ 0.0000   │ 0          │ 0            │ 11.2213     │
+│ nom_ss_100C… │ 0.4500     │ 0.8885     │ 0.0000   │ 0          │ 0            │ 5.7475      │
+│ nom_ff_n40C… │ 0.0365     │ 0.1079     │ 0.0000   │ 0          │ 0            │ 11.1783     │ 
+│ min_tt_025C… │ 0.1726     │ 0.3196     │ 0.0000   │ 0          │ 0            │ 11.2516     │
+│ min_ss_100C… │ 0.5527     │ 0.8798     │ 0.0000   │ 0          │ 0            │ 6.2822      │
+│ min_ff_n40C… │ 0.0791     │ 0.1068     │ 0.0000   │ 0          │ 0            │ 11.2090     │
+│ max_tt_025C… │ 0.0536     │ 0.3234     │ 0.0000   │ 0          │ 0            │ 11.1886     │
+│ max_ss_100C… │ 0.3233     │ 0.8972     │ 0.0000   │ 0          │ 0            │ 5.1907      │
+│ max_ff_n40C… │ -0.0108    │ 0.1095     │ -0.0108  │ 1          │ 0            │ 11.1440     │
+└──────────────┴────────────┴────────────┴──────────┴────────────┴──────────────┴─────────────┴
+┳━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓
+┃ Reg to Reg   ┃           ┃ Setup         ┃ of which Reg ┃ Max Cap       ┃ Max Slew     ┃
+┃ Paths        ┃ Setup TNS ┃ Violations    ┃ to Reg       ┃ Violations    ┃ Violations   ┃
+╇━━━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━┩
+│ 5.1907       │ 0.0000    │ 0             │ 0            │ 44            │ 275          │
+│ 15.3832      │ 0.0000    │ 0             │ 0            │ 1             │ 4            │
+│ 5.7475       │ 0.0000    │ 0             │ 0            │ 38            │ 235          │
+│ 18.8282      │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
+│ 15.6835      │ 0.0000    │ 0             │ 0            │ 1             │ 1            │
+│ 6.2822       │ 0.0000    │ 0             │ 0            │ 29            │ 168          │
+│ 19.0602      │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
+│ 15.0609      │ 0.0000    │ 0             │ 0            │ 5             │ 25           │
+│ 5.1907       │ 0.0000    │ 0             │ 0            │ 44            │ 275          │
+│ 18.5834      │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
+┴──────────────┴───────────┴───────────────┴──────────────┴───────────────┴──────────────┘
 ```
 
 The max Slew/Cap violations can be fixed the same way as in
@@ -1925,7 +2015,8 @@ be:
 Now let's try re-running the flow:
 
 ```console
-[nix-shell:~/openlane2]$ openlane ~/caravel_aes_accelerator/openlane/user_project_wrapper/config.json
+[nix-shell:~/openlane2]$ openlane ~/caravel_aes_accelerator/openlane
+            /user_project_wrapper/config.json
 ```
 
 The flow will finish successfully in ~2 hours and we will see:
@@ -1943,38 +2034,53 @@ Now, the antenna report under
 violations:
 
 ```text
-┏━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━┓
-┃ Partial/Required ┃ Required ┃ Partial ┃ Net                                 ┃ Pin        ┃ Layer ┃
-┡━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━┩
-│ 2.03             │ 400.00   │ 810.79  │ _08755_                             │ _19772_/C  │ met3  │
-│ 2.00             │ 400.00   │ 798.00  │ _14836_                             │ _28092_/A  │ met1  │
-│ 1.75             │ 400.00   │ 701.33  │ _11832_                             │ _22711_/A0 │ met1  │
-│ 1.70             │ 400.00   │ 678.78  │ _11884_                             │ _22770_/A0 │ met1  │
-│ 1.62             │ 400.00   │ 647.67  │ net1481                             │ _25071_/B  │ met1  │
-│ 1.61             │ 3130.28  │ 5050.41 │ _14758_                             │ _28362_/B  │ met4  │
-│ 1.40             │ 3130.28  │ 4394.16 │ _14751_                             │ _28352_/B  │ met4  │
-│ 1.39             │ 3130.28  │ 4350.98 │ _14707_                             │ _28292_/B  │ met4  │
+┏━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━┓
+┃ Partial/Required ┃ Required ┃ Partial ┃ Net                    ┃ Pin        ┃ Layer ┃
+┡━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━ ━╇━━━━━━━━━━━━╇━━━━━━━┩
+│ 2.03             │ 400.00   │ 810.79  │ _08755_                │ _19772_/C  │ met3  │
+│ 2.00             │ 400.00   │ 798.00  │ _14836_                │ _28092_/A  │ met1  │
+│ 1.75             │ 400.00   │ 701.33  │ _11832_                │ _22711_/A0 │ met1  │
+│ 1.70             │ 400.00   │ 678.78  │ _11884_                │ _22770_/A0 │ met1  │
+│ 1.62             │ 400.00   │ 647.67  │ net1481                │ _25071_/B  │ met1  │
+│ 1.61             │ 3130.28  │ 5050.41 │ _14758_                │ _28362_/B  │ met4  │
+│ 1.40             │ 3130.28  │ 4394.16 │ _14751_                │ _28352_/B  │ met4  │
+│ 1.39             │ 3130.28  │ 4350.98 │ _14707_                │ _28292_/B  │ met4  │
 ⋮
 ```
 
 Also, the STA report `xx-openroad-stapostpnr/summary.rpt` has no issues:
 
 ```text
-┏━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓
-┃              ┃ Hold Worst   ┃ Reg to Reg   ┃          ┃ Hold         ┃ of which Reg ┃ Setup Worst  ┃ Reg to Reg   ┃           ┃ Setup         ┃ of which Reg ┃ Max Cap       ┃ Max Slew     ┃
-┃ Corner/Group ┃ Slack        ┃ Paths        ┃ Hold TNS ┃ Violations   ┃ to Reg       ┃ Slack        ┃ Paths        ┃ Setup TNS ┃ Violations    ┃ to Reg       ┃ Violations    ┃ Violations   ┃
-┡━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━┩
-│ Overall      │ 0.0486       │ 0.0486       │ 0.0000   │ 0            │ 0            │ 5.2837       │ 5.2837       │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
-│ nom_tt_025C… │ 0.2274       │ 0.2274       │ 0.0000   │ 0            │ 0            │ 11.0726      │ 15.1596      │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
-│ nom_ss_100C… │ 0.2414       │ 0.7146       │ 0.0000   │ 0            │ 0            │ 5.8981       │ 5.8981       │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
-│ nom_ff_n40C… │ 0.0497       │ 0.0497       │ 0.0000   │ 0            │ 0            │ 11.0978      │ 18.6822      │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
-│ min_tt_025C… │ 0.2253       │ 0.2253       │ 0.0000   │ 0            │ 0            │ 11.0640      │ 15.5219      │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
-│ min_ss_100C… │ 0.3307       │ 0.7108       │ 0.0000   │ 0            │ 0            │ 6.5295       │ 6.5295       │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
-│ min_ff_n40C… │ 0.0486       │ 0.0486       │ 0.0000   │ 0            │ 0            │ 11.0946      │ 18.9314      │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
-│ max_tt_025C… │ 0.2292       │ 0.2292       │ 0.0000   │ 0            │ 0            │ 11.0804      │ 14.7813      │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
-│ max_ss_100C… │ 0.1453       │ 0.7174       │ 0.0000   │ 0            │ 0            │ 5.2837       │ 5.2837       │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
-│ max_ff_n40C… │ 0.0509       │ 0.0509       │ 0.0000   │ 0            │ 0            │ 11.0951      │ 18.3978      │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
-└──────────────┴──────────────┴──────────────┴──────────┴──────────────┴──────────────┴──────────────┴──────────────┴───────────┴───────────────┴──────────────┴───────────────┴──────────────┘
+┏━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳
+┃              ┃ Hold Worst ┃ Reg to Reg ┃          ┃ Hold       ┃ of which Reg ┃ Setup Worst  ┃
+┃ Corner/Group ┃ Slack      ┃ Paths      ┃ Hold TNS ┃ Violations ┃ to Reg       ┃ Slack        ┃
+┡━━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇
+│ Overall      │ 0.0486     │ 0.0486     │ 0.0000   │ 0          │ 0            │ 5.2837       │
+│ nom_tt_025C… │ 0.2274     │ 0.2274     │ 0.0000   │ 0          │ 0            │ 11.0726      │
+│ nom_ss_100C… │ 0.2414     │ 0.7146     │ 0.0000   │ 0          │ 0            │ 5.8981       │
+│ nom_ff_n40C… │ 0.0497     │ 0.0497     │ 0.0000   │ 0          │ 0            │ 11.0978      │
+│ min_tt_025C… │ 0.2253     │ 0.2253     │ 0.0000   │ 0          │ 0            │ 11.0640      │ 
+│ min_ss_100C… │ 0.3307     │ 0.7108     │ 0.0000   │ 0          │ 0            │ 6.5295       │
+│ min_ff_n40C… │ 0.0486     │ 0.0486     │ 0.0000   │ 0          │ 0            │ 11.0946      │
+│ max_tt_025C… │ 0.2292     │ 0.2292     │ 0.0000   │ 0          │ 0            │ 11.0804      │
+│ max_ss_100C… │ 0.1453     │ 0.7174     │ 0.0000   │ 0          │ 0            │ 5.2837       │
+│ max_ff_n40C… │ 0.0509     │ 0.0509     │ 0.0000   │ 0          │ 0            │ 11.0951      │
+└──────────────┴────────────┴────────────┴──────────┴────────────┴──────────────┴──────────────┴
+┳━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓
+┃ Reg to Reg   ┃           ┃ Setup         ┃ of which Reg ┃ Max Cap       ┃ Max Slew     ┃
+┃ Paths        ┃ Setup TNS ┃ Violations    ┃ to Reg       ┃ Violations    ┃ Violations   ┃
+╇━━━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━┩
+│ 5.2837       │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
+│ 15.1596      │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
+│ 5.8981       │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
+│ 18.6822      │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
+│ 15.5219      │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
+│ 6.5295       │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
+│ 18.9314      │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
+│ 14.7813      │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
+│ 5.2837       │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
+│ 18.3978      │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
+┴──────────────┴───────────┴───────────────┴──────────────┴───────────────┴──────────────┘
 ```
 
 ______________________________________________________________________
@@ -1989,7 +2095,8 @@ order:
 1. The successful run tag
 
 ```console
-[nix-shell:~/openlane2]$ bash ~/caravel_aes_accelerator/openlane/copy_views.sh ~/caravel_aes_accelerator user_project_wrapper RUN_TAG
+[nix-shell:~/openlane2]$ bash ~/caravel_aes_accelerator/openlane/copy_views.sh \
+      ~/caravel_aes_accelerator user_project_wrapper RUN_TAG
 ```
 
 This will copy the physical views of the macro in the specified run to your
@@ -2023,7 +2130,8 @@ The following edits are needed for this strategy:
 1. Change the Hardening strategy variables:
 
 ```json
-    "//": "Hardening strategy variables (this is for 3-Top-Level Integration). Visit https://docs.google.com/document/d/1pf-wbpgjeNEM-1TcvX2OJTkHjqH_C9p-LURCASS0Zo8 for more info",
+    "//": "Hardening strategy variables (this is for 3-Top-Level Integration). Visit https://
+         docs.google.com/document/d/1pf-wbpgjeNEM-1TcvX2OJTkHjqH_C9p-LURCASS0Zo8 for more info",
     "SYNTH_ELABORATE_ONLY": false,
     "RUN_POST_GPL_DESIGN_REPAIR": true,
     "RUN_POST_CTS_RESIZER_TIMING": true,
@@ -2103,7 +2211,8 @@ So, the final config.json for the User Project's Wrapper will be:
     ],
     "PNR_SDC_FILE": "dir::pnr.sdc",
     
-    "//": "Hardening strategy variables (this is for 3-Top-Level Integration). Visit https://docs.google.com/document/d/1pf-wbpgjeNEM-1TcvX2OJTkHjqH_C9p-LURCASS0Zo8 for more info",
+    "//": "Hardening strategy variables (this is for 3-Top-Level Integration). Visit https://
+         docs.google.com/document/d/1pf-wbpgjeNEM-1TcvX2OJTkHjqH_C9p-LURCASS0Zo8 for more info",
     "SYNTH_ELABORATE_ONLY": false,
     "RUN_POST_GPL_DESIGN_REPAIR": true,
     "RUN_POST_CTS_RESIZER_TIMING": true,
@@ -2214,7 +2323,8 @@ ______________________________________________________________________
 To harden macros with OpenLane, we use the default flow, {flow}`Classic`.
 
 ```console
-[nix-shell:~/openlane2]$ openlane ~/caravel_aes_accelerator/openlane/user_project_wrapper/config.json
+[nix-shell:~/openlane2]$ openlane ~/caravel_aes_accelerator/openlane
+         /user_project_wrapper/config.json
 ```
 
 The flow will finish successfully in ~1.5 hours and we will see:
@@ -2230,7 +2340,8 @@ ______________________________________________________________________
 To open the final {term}`GDSII` layout run this command:
 
 ```console
-[nix-shell:~/openlane2]$ openlane --last-run --flow openinklayout ~/caravel_aes_accelerator/openlane/user_project_wrapper/config.json
+[nix-shell:~/openlane2]$ openlane --last-run --flow openinklayout ~/caravel_aes_accelerator
+         /openlane/user_project_wrapper/config.json
 ```
 
 Now, we can see that there are STD cells all over the `user_project_wrapper` and
@@ -2263,21 +2374,36 @@ ______________________________________________________________________
 Looking at `xx-openroad-stapostpnr/summary.rpt`, there are no issues.
 
 ```
-┏━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓
-┃               ┃ Hold Worst    ┃ Reg to Reg    ┃          ┃ Hold          ┃ of which Reg ┃ Setup Worst   ┃ Reg to Reg   ┃           ┃ Setup         ┃ of which Reg ┃ Max Cap       ┃ Max Slew     ┃
-┃ Corner/Group  ┃ Slack         ┃ Paths         ┃ Hold TNS ┃ Violations    ┃ to Reg       ┃ Slack         ┃ Paths        ┃ Setup TNS ┃ Violations    ┃ to Reg       ┃ Violations    ┃ Violations   ┃
-┡━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━┩
-│ Overall       │ 0.0394        │ 0.0394        │ 0.0000   │ 0             │ 0            │ 2.9640        │ 7.0837       │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
-│ nom_tt_025C_… │ 0.2089        │ 0.2089        │ 0.0000   │ 0             │ 0            │ 9.2328        │ 16.3319      │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
-│ nom_ss_100C_… │ 0.6504        │ 0.6504        │ 0.0000   │ 0             │ 0            │ 3.2635        │ 7.4518       │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
-│ nom_ff_n40C_… │ 0.0444        │ 0.0444        │ 0.0000   │ 0             │ 0            │ 10.9069       │ 19.5798      │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
-│ min_tt_025C_… │ 0.2026        │ 0.2026        │ 0.0000   │ 0             │ 0            │ 9.4448        │ 16.5702      │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
-│ min_ss_100C_… │ 0.6390        │ 0.6390        │ 0.0000   │ 0             │ 0            │ 3.5688        │ 7.8739       │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
-│ min_ff_n40C_… │ 0.0394        │ 0.0394        │ 0.0000   │ 0             │ 0            │ 10.9061       │ 19.7497      │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
-│ max_tt_025C_… │ 0.2205        │ 0.2205        │ 0.0000   │ 0             │ 0            │ 9.0069        │ 16.1275      │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
-│ max_ss_100C_… │ 0.6725        │ 0.6725        │ 0.0000   │ 0             │ 0            │ 2.9640        │ 7.0837       │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
-│ max_ff_n40C_… │ 0.0515        │ 0.0515        │ 0.0000   │ 0             │ 0            │ 10.9095       │ 19.4285      │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
-└───────────────┴───────────────┴───────────────┴──────────┴───────────────┴──────────────┴───────────────┴──────────────┴───────────┴───────────────┴──────────────┴───────────────┴──────────────┘
+┏━━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳
+┃               ┃ Hold Worst┃ Reg to Reg ┃          ┃ Hold       ┃ of which Reg ┃ Setup Worst   ┃
+┃ Corner/Group  ┃ Slack     ┃ Paths      ┃ Hold TNS ┃ Violations ┃ to Reg       ┃ Slack         ┃
+┡━━━━━━━━━━━━━━━╇━━━━━━━━━━ ╇━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇
+│ Overall       │ 0.0394    │ 0.0394     │ 0.0000   │ 0          │ 0            │ 2.9640        │
+│ nom_tt_025C_… │ 0.2089    │ 0.2089     │ 0.0000   │ 0          │ 0            │ 9.2328        │
+│ nom_ss_100C_… │ 0.6504    │ 0.6504     │ 0.0000   │ 0          │ 0            │ 3.2635        │ 
+│ nom_ff_n40C_… │ 0.0444    │ 0.0444     │ 0.0000   │ 0          │ 0            │ 10.9069       │
+│ min_tt_025C_… │ 0.2026    │ 0.2026     │ 0.0000   │ 0          │ 0            │ 9.4448        │
+│ min_ss_100C_… │ 0.6390    │ 0.6390     │ 0.0000   │ 0          │ 0            │ 3.5688        │ 
+│ min_ff_n40C_… │ 0.0394    │ 0.0394     │ 0.0000   │ 0          │ 0            │ 10.9061       │
+│ max_tt_025C_… │ 0.2205    │ 0.2205     │ 0.0000   │ 0          │ 0            │ 9.0069        │ 
+│ max_ss_100C_… │ 0.6725    │ 0.6725     │ 0.0000   │ 0          │ 0            │ 2.9640        │
+│ max_ff_n40C_… │ 0.0515    │ 0.0515     │ 0.0000   │ 0          │ 0            │ 10.9095       │
+└───────────────┴───────────┴────────────┴──────────┴────────────┴──────────────┴───────────────┴
+┳━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓
+┃ Reg to Reg   ┃           ┃ Setup         ┃ of which Reg ┃ Max Cap       ┃ Max Slew     ┃
+┃ Paths        ┃ Setup TNS ┃ Violations    ┃ to Reg       ┃ Violations    ┃ Violations   ┃
+╇━━━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━┩
+│ 7.0837       │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
+│ 16.3319      │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
+│ 7.4518       │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
+│ 19.5798      │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
+│ 16.5702      │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
+│ 7.8739       │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
+│ 19.7497      │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
+│ 16.1275      │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
+│ 7.0837       │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
+│ 19.4285      │ 0.0000    │ 0             │ 0            │ 0             │ 0            │
+┴──────────────┴───────────┴───────────────┴──────────────┴───────────────┴──────────────┘
 ```
 
 ```{admonition} Note
@@ -2346,7 +2472,8 @@ order:
 1. The successful run tag
 
 ```console
-[nix-shell:~/openlane2]$ bash ~/caravel_aes_accelerator/openlane/copy_views.sh ~/caravel_aes_accelerator user_project_wrapper RUN_TAG
+[nix-shell:~/openlane2]$ bash ~/caravel_aes_accelerator/openlane/copy_views.sh \
+      ~/caravel_aes_accelerator user_project_wrapper RUN_TAG
 ```
 
 This will copy the physical views of the macro in the specified run to your
